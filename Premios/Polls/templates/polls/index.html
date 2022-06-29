@@ -1,0 +1,40 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <link rel="stylesheet" href=" {% static 'polls/stylos.css' %} ">
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Home</title>
+</head>
+<body>
+      
+
+<div>
+      {% if question %}
+         <fieldset>   <ul> 
+                 <h1> Preguntas </h1>
+                  {% for question in question %}
+                        <li>
+                             <a href=" {% url  "polls:detalle"  question.id  %} ">
+                               {{ question}}   
+                              </a>
+                        </li>
+                  {% endfor %}
+            
+            </ul></fieldset>
+      {% else %}
+      <h1>Sorry!</h1>
+      <p>
+            No hay preguntas
+      </p>
+      {% endif %}
+</div>
+
+
+
+</body>
+</html>

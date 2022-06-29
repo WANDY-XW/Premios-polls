@@ -1,0 +1,96 @@
+
+
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <link rel="stylesheet" href=" {% static 'polls/stylos.css' %} ">
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.
+0">
+      <title>Home</title>
+</head>
+<body>
+
+
+
+                  <form action="{% url 'polls:vote' question.id %}" 
+                  method="post">
+            {% csrf_token %}
+            <fieldset>
+                  <legend>
+                        <h1>{{ question.question_text }}</h1>
+                  </legend>
+            {% if error_message %}
+            <p><strong>
+                  {{ error_message }}
+                  </strong></p>
+                  {% endif %}
+            {% for choice in question.choice_set.all %}
+
+                  <input 
+                  type="radio" 
+                  name="choice"
+                  id="choice{{ forloop.counter }}" 
+                  value="{{ choice.id }}">
+
+                  <label for="choice{{ forloop.counter }}">
+                        {{ choice.choice_text }}
+                  </label>
+                  <br>
+            {% endfor %}
+            </fieldset>
+            <input type="submit" value="Vote">
+            <button>
+                  <a href="{% url 'polls:index'  %}">Home </a>
+            </button>
+            </form>
+</body>
+
+
+
+
+<!--
+<div>
+      
+      <form action=" {% url 'polls:vote' question.id %}"  method='POST' >
+            {% csrf_token %}
+                  {% if question %}
+            <ul>
+                  <label for="choices {{ forloop.counter}}">
+                              <h2>{{ question }}</h2>
+                        {% for choices in question.choice_set.all %}
+                        
+                              <li>
+                                    <input 
+                                    type="radio" 
+                                    name="choices" 
+                                    id=" choices {{ forloop.counter}}">
+                                 {{question.id}}  question id 
+                                    {{choices.id}}     choice id
+                                     {{ choices }}     choices
+                              </li>
+                              
+                        {% endfor %}
+                  </label>
+            </ul>
+{% else %}
+<p>
+      No existen Respuestas
+</p>
+{% endif %}
+<button type='submit' >
+      Votar
+</button>
+      </form>
+
+<button>
+      <a href=" {% url 'polls:index'  %} ">Preguntas</a>
+</button>
+
+</div>
+-->
